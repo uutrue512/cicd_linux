@@ -11,9 +11,20 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Delete Docker Image and Containers
-        run: timeout 30s sudo docker rm -f uutrue || true
+      - name: Check if Docker container exists and remove it
+        run: |
+          echo "Checking for container 'uutrue'..."
+          if sudo docker ps -a --format '{{.Names}}' | grep -w uutrue; then
+            echo "'uutrue' found. Attempting to remove..."
+            sudo docker rm -f uutrue || true
+            echo "'uutrue' removed successfully."
+          else
+            echo "No container named 'uutrue' found."
+          fi
+
       - name: Pull Docker Image from Docker hub
         run: sudo docker pull uutrue512/songdo:latest
+
       - name: Execute Docker Container
         run: sudo docker run -d -p 80:3000 --name uutrue uutrue512/songdo:latest
+
