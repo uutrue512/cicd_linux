@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Delete Docker Image and Containers
-        run: sudo docker rm -f uutrue || true
+        run: timeout 30s sudo docker rm -f uutrue || true
       - name: Pull Docker Image from Docker hub
         run: sudo docker pull uutrue512/songdo:latest
       - name: Execute Docker Container
