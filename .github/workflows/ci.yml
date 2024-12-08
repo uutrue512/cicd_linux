@@ -29,7 +29,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t uutrue512/songdo:0.1 .
+        run: docker build -t uutrue512/songdo .
 
       - name: Push docker image
-        run: docker push uutrue512/songdo:0.1
+        run: docker push uutrue512/songdo:latest
