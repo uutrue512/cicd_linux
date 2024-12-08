@@ -11,9 +11,6 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Check if Docker container exists and remove it
-        run: sudo docker ps -a
-
       - name: Pull Docker Image from Docker hub
         run: sudo docker pull uutrue512/songdo:latest
 
