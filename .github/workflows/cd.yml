@@ -13,8 +13,14 @@ jobs:
     steps:
       - name: Delete Docker Image and Containers
         run: |
-          sudo docker stop $(sudo docker ps -q) || true
-          sudo docker rm $(sudo docker ps -q) || true
+          echo "Checking for container 'uutrue'..."
+          if sudo docker ps -a --format '{{.Names}}' | grep -w uutrue; then
+            echo "'uutrue' found. Attempting to remove..."
+            sudo docker rm -f uutrue
+            echo "'uutrue' removed successfully."
+          else
+            echo "No container named 'uutrue' found."
+          fi
       - name: Pull Docker Image from Docker hub
         run: sudo docker pull uutrue512/songdo:latest
       - name: Execute Docker Container
