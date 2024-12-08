@@ -12,7 +12,10 @@ jobs:
 
     steps:
       - name: Delete Docker Image and Containers
-        run: sudo docker rm -f uutrue || true
+        run: |
+          if sudo docker ps -a --format '{{.Names}}' | grep -w uutrue; then
+          sudo docker rm -f uutrue;
+          fi
       - name: Pull Docker Image from Docker hub
         run: sudo docker pull uutrue512/songdo:latest
       - name: Execute Docker Container
