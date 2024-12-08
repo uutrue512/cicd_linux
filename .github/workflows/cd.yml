@@ -12,15 +12,7 @@ jobs:
 
     steps:
       - name: Check if Docker container exists and remove it
-        run: |
-          echo "Checking for container 'uutrue'..."
-          if sudo docker ps -a --format '{{.Names}}' | grep -w uutrue; then
-            echo "'uutrue' found. Attempting to remove..."
-            sudo docker rm -f uutrue || true
-            echo "'uutrue' removed successfully."
-          else
-            echo "No container named 'uutrue' found."
-          fi
+        run: timeout 30s sudo docker ps -a --format '{{.Names}}' | grep -w uutrue || echo "No container found"i
 
       - name: Pull Docker Image from Docker hub
         run: sudo docker pull uutrue512/songdo:latest
