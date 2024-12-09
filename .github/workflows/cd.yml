@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-
     steps:
       - name: Delete Docker Image and Containers
         run: sudo docker rm -f uutrue
